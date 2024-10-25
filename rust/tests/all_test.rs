@@ -143,11 +143,7 @@ fn benchmark_test() {
         if len < 10 && len % 2 == 1 {
             len += 1;
         }
-        let b = BenchmarkData {
-            lat: lat,
-            lng: lng,
-            len: len,
-        };
+        let b = BenchmarkData { lat, lng, len };
         bd.push(b);
     }
 

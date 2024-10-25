@@ -25,7 +25,7 @@ pub fn normalize_longitude(value: f64) -> f64 {
 }
 
 pub fn clip_latitude(latitude_degrees: f64) -> f64 {
-    latitude_degrees.min(LATITUDE_MAX).max(-LATITUDE_MAX)
+    latitude_degrees.clamp(-LATITUDE_MAX, LATITUDE_MAX)
 }
 
 pub fn compute_latitude_precision(code_length: usize) -> f64 {
@@ -40,8 +40,8 @@ pub fn prefix_by_reference(pt: Point<f64>, code_length: usize) -> String {
     let precision = compute_latitude_precision(code_length);
     let mut code = encode(
         Point::new(
-            (pt.lng() / precision).floor() * precision,
-            (pt.lat() / precision).floor() * precision,
+            (pt.x() / precision).floor() * precision,
+            (pt.y() / precision).floor() * precision,
         ),
         PAIR_CODE_LENGTH,
     );
